@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Floor Plan</title>
+    <script src="https://unpkg.com/konva@7.2.5/konva.min.js"></script>
+    <style>
+        #container {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+
+        const layer = new Konva.Layer();
+        stage.add(layer);
+
+        const rect = new Konva.Rect({
+            x: stage.width() / 2,
+            y: stage.height() / 2,
+            width: 100,
+            height: 50,
+            fill: 'grey',
+            draggable: true,
+        });
+
+        layer.add(rect);
+        layer.draw();
+
+        rect.on('dragend', () => {
+            console.log('Room moved to:', rect.position());
+        });
+    </script>
+</body>
+</html>
